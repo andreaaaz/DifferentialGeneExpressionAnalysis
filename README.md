@@ -1,4 +1,2 @@
 # DifferentialGeneExpressionAnalysis-
-Analysis of RNA-seq data obtained from human T cells transduced with a mesothelin-targeting CAR with genetic disruption of ZFP36 and mock control. This repository contains the RMarkdown report and the scripts used to process the data obtained from de bioproject: PRJNA983389. 
-This repository is a proyect developed on the RNA-seq class intructed by Evelia Coss, available at: https://github.com/EveliaCoss/RNAseq_classFEB2024. 
- 
+Analysis of RNA-seq data obtained from human T cells transduced with a mesothelin-targeting CAR with genetic disruption of ZFP36 and mock control. This repository is a project developed on the RNA-seq class intructed by Evelia Coss, available at: https://github.com/EveliaCoss/RNAseq_classFEB2024, and contains the RMarkdown report and the scripts used to process the data obtained from de bioproject: PRJNA983389. 
