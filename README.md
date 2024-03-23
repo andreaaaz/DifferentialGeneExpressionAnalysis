@@ -89,3 +89,5 @@ Finally, there are two files in the general project directory: ```metadata.csv``
 /mnt/Guanina/bioinfo24/Equipo3/Proyecto/metadata.csv
 /mnt/Guanina/bioinfo24/Equipo3/Proyecto/TruSeq3-PE-2.fa
 ```
+## Results an discussion
+Available in the RMarkdown RNA_seq.Rmd
