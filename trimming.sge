@@ -1,0 +1,43 @@
+#!/bin/bash
+# Use current working directory
+#$ -cwd
+#
+# Join stdout and stderr
+#$ -j y
+#
+# Run job through bash shell
+#$ -S /bin/bash
+#
+#You can edit the scriptsince this line
+#
+# Your job name
+#$ -N trimming
+#
+# Send an email after the job has finished
+#$ -m e
+#$ -M andyszermeno@gmail.com
+#
+# If modules are needed, source modules environment (Do not delete the next line):
+. /etc/profile.d/modules.sh
+#
+# Tool:
+module load trimmomatic/0.33
+
+#Movernos a la carpeta con los datos
+cd /mnt/Guanina/bioinfo24/Equipo3/Proyecto/data
+
+# Write your commands in the next line:
+
+#Ciclo para hacer trimming en cada par de lecturas 
+for i in *_1.fastq.gz;
+do echo
+trimmomatic PE -threads 8 -phred33 $i "${i%_1.fastq.gz}_2.fastq.gz" \
+#Rutas y nombre de como se guardaran los archivos
+/mnt/Guanina/bioinfo24/Equipo3/Proyecto/TRIM_results/"${i%_1.fastq.gz}_1_trimmed.fq.gz" \
+/mnt/Guanina/bioinfo24/Equipo3/Proyecto/TRIM_results/"${i%_1.fastq.gz}_1_unpaired.fq.gz" \
+/mnt/Guanina/bioinfo24/Equipo3/Proyecto/TRIM_results/"${i%_1.fastq.gz}_2_trimmed.fq.gz" \
+/mnt/Guanina/bioinfo24/Equipo3/Proyecto/TRIM_results/"${i%_1.fastq.gz}_2_unpaired.fq.gz" \
+#Archivo con adaptadores e intrucciones para el trimming 
+ILLUMINACLIP:/mnt/Guanina/bioinfo24/Equipo3/Proyecto/TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:80 \
+
+done
