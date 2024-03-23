@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+# Your job name
+#$ -N align
+## Use current working directory
+#$ -cwd
+#
+# Join stdout and stderr
+#$ -j y
+#
+# Run job through bash shell
+#$ -S /bin/bash
+#
+# Send an email after the job has finished
+#$ -m e
+#$ -M andyszermeno@gmail.com
+#
+
+#Modulo que usaremos
+module load star/2.7.9a
+
+index=/mnt/Guanina/bioinfo24/Equipo3/Proyecto/STAR_index
+#Archivos que se alinearan
+FILES=/mnt/Guanina/bioinfo24/Equipo3/Proyecto/TRIM_results/*_1_trimmed.fq.gz
+for f in $FILES
+do
+#Extraer el nombre base del archivo
+    base=$(basename $f _1_trimmed.fq.gz)
+    echo $base
+#Numero de hilos de CPU utilizados
+    STAR --runThreadN 12 --genomeDir $index --readFilesIn $f /mnt/Guanina/bioinfo24/Equipo3/Proyecto/TRIM_results/$base"_2_trimmed.fq.gz" \
+#Formato de salida del archivo SAM
+    --outSAMtype BAM SortedByCoordinate \
+#Cuantificacion de expresion genica
+    --quantMode GeneCounts \
+    --readFilesCommand zcat \
+#Nombrar archivos de salida
+    --outFileNamePrefix /mnt/Guanina/bioinfo24/Equipo3/Proyecto/STAR_output/$base
+done
+
