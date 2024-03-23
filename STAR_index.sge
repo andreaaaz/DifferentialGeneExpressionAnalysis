@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# Your job name
+#$ -N index
+#
+# Use current working directory
+#$ -cwd
+#
+# Join stdout and stderr
+#$ -j y
+#
+# Run job through bash shell 
+#$ -S /bin/bash
+#
+# Send an email after the job has finished
+#$ -m e
+#$ -M andyszermeno@gmail.com
+
+
+# Modulo que usearemos:
+module load star/2.7.9a 
+
+#Hilos de CPU utilizados
+STAR --runThreadN 12 \
+--runMode genomeGenerate \
+#Ruta donde se guardara el index
+--genomeDir /mnt/Guanina/bioinfo24/Equipo3/Proyecto/STAR_index \
+#Ruta donde esta el genoma de referencia del humano (disponible en el cluster)
+--genomeFastaFiles /mnt/Archives/genome/human/GRCh38/UCSC/chromosomes/ \
+#Ruta del archivo de anotacion del genoma (tambien disponible en el cluster)
+--sjdbGTFfile /mnt/Archives/genome/human/GRCh38/ensembl76/GTF-file/Homo_sapiens.GRCh38.76.gtf \
+#Longitud minima de la secuencia de sobreposicion utilizada en el proceso de alineacion
+--sjdbOverhang 149
